@@ -17,7 +17,7 @@
         "tbfed-pagefooter",
         "-simple-page-toc",
         "links",
-        "copy-code-button",
+        "-copy-code-button",
         "theme-comscore"
     ],
     "styles": {
