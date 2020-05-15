@@ -1,0 +1,46 @@
+{
+    "title": "Blog of wzdbsss",
+    "description": "write something to remember",
+    "language": "en-US",
+    "plugins": [
+        "highlight",
+        "search-pro",
+        "-sharing",
+        "fontsettings",
+        "livereload",
+        "github",
+        "-editlink",
+        "prism",
+        "-baidu",
+        "splitter",
+        "-sitemap",
+        "tbfed-pagefooter",
+        "-simple-page-toc",
+        "links",
+        "copy-code-button",
+        "theme-comscore"
+    ],
+    "styles": {
+        "website": "styles/website.css",
+        "ebook": "styles/website.css"
+    },
+    "pluginsConfig": {
+        "tbfed-pagefooter": {
+            "copyright": "&copy wzdbsss",
+            "modify_label": "modified time: ",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "fontsettings": {
+            "theme": "white",
+            "family": "serif",
+            "size": 12
+        },
+        "simple-page-toc": {
+            "maxDepth": 3,
+            "skipFirstH1": true
+        },
+        "github": {
+            "url": "https://github.com/wzdbsss"
+        }
+    }
+}

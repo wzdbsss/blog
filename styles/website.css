@@ -1,0 +1,117 @@
+/*隐藏底部gitbook */
+.gitbook-link {
+  display: none !important;
+}
+body > div > div.book-summary > nav > ul > li:nth-child(1) {
+  display: none !important;
+}
+.summary > li:nth-child(4) {
+  display: none !important;
+}
+li.chapter {
+  padding-left: 20px;
+}
+
+.book-summary {
+  font-size: 1.3rem !important;
+}
+
+.book-body {
+  font-size: 1.5rem !important;
+}
+.copy-code-button {
+  display: none;
+}
+pre:hover > .copy-code-button {
+  display: block;
+}
+
+blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+table th,
+table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+pre {
+  word-wrap: normal;
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  font-size: 100%;
+  line-height: inherit;
+  word-wrap: normal;
+  white-space: pre;
+  border: 0;
+  border-radius: 3px;
+  background-color: transparent;
+}
+pre code:before,
+pre code:after {
+  content: normal;
+}
+code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+code:before,
+code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+a {
+  color: #4078c0;
+  text-decoration: none;
+  background: transparent;
+}
+img {
+  max-width: 80%;
+  max-height: 80%;
+  display: table-cell;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 10px #555;
+  box-shadow: 0 0 10px #555;
+}
+strong {
+  font-weight: bold;
+}
+em {
+  font-style: italic;
+}

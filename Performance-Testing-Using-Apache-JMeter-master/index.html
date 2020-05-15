@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Performance Test Summary</title>
+    <link rel="stylesheet" href="./styles/github/markdown.css">
+    <style>
+         body {
+            width: 980px;
+            margin: 45px auto;
+        }
+        .title {
+            display: block;
+            padding: 9px 10px 10px;
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 17px;
+            background-color: #f5f5f5;
+            border: 1px solid #d8d8d8;
+            border-bottom: 0;
+            border-radius: 3px 3px 0 0;
+        }
+        a {
+            text-decoration: none;
+            color: #282828;
+        }
+    </style>
+</head>
+<body>
+    <div class="markdown-body">
+        <h1 id="performance-testing-using-apache-jmeter">Performance Testing Using Apache JMeter</h1>
+<h2 id="getting-start">Getting Start</h2>
+<ul>
+<li>Download and install Apache JMeter from <a href="http://jmeter.apache.org/download_jmeter.cgi">http://jmeter.apache.org/download_jmeter.cgi</a>.</li>
+<li>Get a quick start at <a href="https://gojira.siemens.com/mindsphere_wiki/pages/viewpage.action?pageId=43426712">Performance testing tutorial (step by step)</a>,
+and you can get a full help at official website <a href="https://jmeter.apache.org/usermanual">https://jmeter.apache.org/usermanual</a></li>
+</ul>
+<h2 id="example-case-for-pattern-matching">Example case for pattern matching</h2>
+<ul>
+<li>Here we explore a more completely one. Download the example JMX <a href="./Patternmatching.jmx">Patternmatching.jmx</a> and open it in your JMeter. In the first step we configure some variables and these variables can be refered by ${variable_key} in Jmeter. Then get web token from auth server before we start loading test, add a Thread Group and configure a HTTP Request as below.
+<img src="3.png" alt="User Defined Variables">  </li>
+<li>Once the token is delivered by response body, in next step JSON Extractor will be helpful, JSON Extractor is a tool inside Jmeter and it can parse the response body, we can use it getting the token. There is a farther explore for you about how to extract data from JSON: <a href="https://octoperf.com/blog/2017/03/09/how-to-extract-data-from-json-response-using-jmeter">https://octoperf.com/blog/2017/03/09/how-to-extract-data-from-json-response-using-jmeter</a>, once we get the specific data we can set it to Jmeter variables by <code>${__setProperty(token, ${token})}</code> in BeanShell and simply use it by <code>${__property(token)}</code> in another Thread Group. <img src="4.png" alt="User Defined Variables"></li>
+<li>Remember configure token in the Header of loading testing Request. For many requests body is pretty large so we choose read it from file,  there is another useful function for parametrization <code>__FileToString</code>. As its name suggests, this function reads the entire file every time it is called and stores it in a JMeter variable when data is inserted in the Variable Name parameter. In this case, we use <code>${__FileToString(${patterns_10_events_3000},,)}</code> reading data from file <code>patterns_10_events_3000</code>, this input file contains 10 patterns, 3000 events for current request.
+<img src="6.png" alt="User Defined Variables"></li>
+<li>Open terminal type <code>jmeter -n -t Patternmatching.jmx -l Patternmatching.csv -e -o result</code> to start test. <code>Patternmatching.csv</code> is log file samples which could be use for further analyzing, there is also a <a href="./result/index.html">report dashboard</a> after loading test.
+<img src="8.png" alt="User Defined Variables"></li>
+</ul>
+<h2 id="distributed-testing">Distributed Testing</h2>
+<p>Distributed testing allows for testing in a distributed environment. In a typical distributed environment, there are different machines each running a test engine instance and controlled by one primary machine or node. Distributed testing comes in handy when you have large number of users to simulate and test and a single machine is not good enough to handle such load. You can distribute the tests on different nodes The different nodes are controlled or managed by one single client node.</p>
+<h4 id="start-slave-nodes">Start slave nodes</h4>
+<ul>
+<li>visit /bin directory to edit jmeter.properties file, disable JMeter running on a remote server over SSH by <code>server.rmi.ssl.disable=true</code></li>
+<li>on each slave node start JMeter server with <code>apache-jmeter-4.0/bin/jmeter-server -Djava.rmi.server.hostname=${slave_ip}</code></li>
+</ul>
+<h4 id="start-master">Start master</h4>
+<ul>
+<li>visit /bin directory to edit jmeter.properties file, disable JMeter running on a remote server over SSH as last step, adds IP slave machine as shown below: <code>remote_hosts=${slave_ips}</code></li>
+<li>then start loading test with<br><code>apache-jmeter-4.0/bin/jmeter -n -t /home/jmeter_master/jmeter/plan/Patternmatching.jmx -l /home/jmeter_master/jmeter/results/Patternmatching.csv -e -o /home/jmeter_master/jmeter/results/ -X -r</code></li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>Always open jmeter(Unix)/jmeter.bat(Windows) to use Jmeter.</li>
+<li>Don&#39;t use GUI mode for load testing, only for Test creation and Test debugging.</li>
+<li>if you get problems such as Master won&#39;t shut down, you can start master with <code>apache-jmeter-4.0/bin/jmeter -n -t /home/jmeter_master/jmeter/plan/Patternmatching.jmx -l /home/jmeter_master/jmeter/results/Patternmatching.csv -e -o /home/jmeter_master/jmeter/results/ -X -r -Djava.rmi.server.hostname=${host_ip}</code></li>
+<li>when distributing test reading request data from file, be careful the data path all the same on each nodes.</li>
+</ul>
+
+    </div>
+</body>
+</html>
