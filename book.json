@@ -3,7 +3,7 @@
     "description": "write something to remember",
     "language": "en-US",
     "structure": {
-        "readme": "NullPointerException.md"
+        "readme": "Java-NullPointerException-Debug.md"
     },
     "plugins": [
         "highlight",
