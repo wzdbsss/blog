@@ -2,9 +2,6 @@
 .gitbook-link {
   display: none !important;
 }
-body > div > div.book-summary > nav > ul > li:nth-child(1) {
-  display: none !important;
-}
 .summary > li:nth-child(4) {
   display: none !important;
 }
