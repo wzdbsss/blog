@@ -1,0 +1,354 @@
+
+<!DOCTYPE HTML>
+<html lang="en-US" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Performance-Testing-Using-Apache-JMeter · Blog of wzdbsss</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-links/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../NullPointerException-jobmanager/NullPointerException.html" />
+    
+    
+    <link rel="prev" href="../" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Custom introduction name
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="PerformanceTest.html">
+            
+                <a href="PerformanceTest.html">
+            
+                    
+                    Performance-Testing-Using-Apache-JMeter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../NullPointerException-jobmanager/NullPointerException.html">
+            
+                <a href="../NullPointerException-jobmanager/NullPointerException.html">
+            
+                    
+                    NullPointerException 排查
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Performance-Testing-Using-Apache-JMeter</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="performance-testing-using-apache-jmeter">Performance Testing Using Apache JMeter</h1>
+<h2 id="getting-start">Getting Start</h2>
+<ul>
+<li>Download and install Apache JMeter from <a href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank">http://jmeter.apache.org/download_jmeter.cgi</a>.</li>
+<li>Get a quick start at <a href="https://gojira.siemens.com/mindsphere_wiki/pages/viewpage.action?pageId=43426712" target="_blank">Performance testing tutorial (step by step)</a>,
+and you can get a full help at official website <a href="https://jmeter.apache.org/usermanual" target="_blank">https://jmeter.apache.org/usermanual</a></li>
+</ul>
+<h2 id="example-case-for-pattern-matching">Example case for pattern matching</h2>
+<ul>
+<li>Here we explore a more completely one. Download the example JMX <a href="Patternmatching.jmx">Patternmatching.jmx</a> and open it in your JMeter. In the first step we configure some variables and these variables can be refered by ${variable_key} in Jmeter. Then get web token from auth server before we start loading test, add a Thread Group and configure a HTTP Request as below.
+<img src="3.png" alt="User Defined Variables">  </li>
+<li>Once the token is delivered by response body, in next step JSON Extractor will be helpful, JSON Extractor is a tool inside Jmeter and it can parse the response body, we can use it getting the token. There is a farther explore for you about how to extract data from JSON: <a href="https://octoperf.com/blog/2017/03/09/how-to-extract-data-from-json-response-using-jmeter" target="_blank">https://octoperf.com/blog/2017/03/09/how-to-extract-data-from-json-response-using-jmeter</a>, once we get the specific data we can set it to Jmeter variables by <code>${__setProperty(token, ${token})}</code> in BeanShell and simply use it by <code>${__property(token)}</code> in another Thread Group. <img src="4.png" alt="User Defined Variables"></li>
+<li>Remember configure token in the Header of loading testing Request. For many requests body is pretty large so we choose read it from file,  there is another useful function for parametrization <code>__FileToString</code>. As its name suggests, this function reads the entire file every time it is called and stores it in a JMeter variable when data is inserted in the Variable Name parameter. In this case, we use <code>${__FileToString(${patterns_10_events_3000},,)}</code> reading data from file <code>patterns_10_events_3000</code>, this input file contains 10 patterns, 3000 events for current request.
+<img src="6.png" alt="User Defined Variables"></li>
+<li>Open terminal type <code>jmeter -n -t Patternmatching.jmx -l Patternmatching.csv -e -o result</code> to start test. <code>Patternmatching.csv</code> is log file samples which could be use for further analyzing, there is also a <a href="result/index.html">report dashboard</a> after loading test.
+<img src="8.png" alt="User Defined Variables"></li>
+</ul>
+<h2 id="distributed-testing">Distributed Testing</h2>
+<p>Distributed testing allows for testing in a distributed environment. In a typical distributed environment, there are different machines each running a test engine instance and controlled by one primary machine or node. Distributed testing comes in handy when you have large number of users to simulate and test and a single machine is not good enough to handle such load. You can distribute the tests on different nodes The different nodes are controlled or managed by one single client node.</p>
+<h4 id="start-slave-nodes">Start slave nodes</h4>
+<ul>
+<li>visit /bin directory to edit jmeter.properties file, disable JMeter running on a remote server over SSH by <code>server.rmi.ssl.disable=true</code></li>
+<li>on each slave node start JMeter server with <code>apache-jmeter-4.0/bin/jmeter-server -Djava.rmi.server.hostname=${slave_ip}</code></li>
+</ul>
+<h4 id="start-master">Start master</h4>
+<ul>
+<li>visit /bin directory to edit jmeter.properties file, disable JMeter running on a remote server over SSH as last step, adds IP slave machine as shown below: <code>remote_hosts=${slave_ips}</code></li>
+<li>then start loading test with<br><code>apache-jmeter-4.0/bin/jmeter -n -t /home/jmeter_master/jmeter/plan/Patternmatching.jmx -l /home/jmeter_master/jmeter/results/Patternmatching.csv -e -o /home/jmeter_master/jmeter/results/ -X -r</code></li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>Always open jmeter(Unix)/jmeter.bat(Windows) to use Jmeter.</li>
+<li>Don&apos;t use GUI mode for load testing, only for Test creation and Test debugging.</li>
+<li>if you get problems such as Master won&apos;t shut down, you can start master with <code>apache-jmeter-4.0/bin/jmeter -n -t /home/jmeter_master/jmeter/plan/Patternmatching.jmx -l /home/jmeter_master/jmeter/results/Patternmatching.csv -e -o /home/jmeter_master/jmeter/results/ -X -r -Djava.rmi.server.hostname=${host_ip}</code></li>
+<li>when distributing test reading request data from file, be careful the data path all the same on each nodes.</li>
+</ul>
+<footer class="page-footer"><span class="copyright">&#xA9; wzdbsss all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified time: 
+2020-05-15 10:09:57
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../" class="navigation navigation-prev " aria-label="Previous page: Custom introduction name">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../NullPointerException-jobmanager/NullPointerException.html" class="navigation navigation-next " aria-label="Next page: NullPointerException 排查">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Performance-Testing-Using-Apache-JMeter","level":"1.2","depth":1,"next":{"title":"NullPointerException 排查","level":"1.3","depth":1,"path":"NullPointerException-jobmanager/NullPointerException.md","ref":"NullPointerException-jobmanager/NullPointerException.md","articles":[]},"previous":{"title":"Custom introduction name","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","fontsettings","livereload","github","-editlink","prism","-baidu","splitter","-sitemap","tbfed-pagefooter","-simple-page-toc","links","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css","ebook":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy wzdbsss","modify_label":"modified time: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"family":"serif","size":12,"theme":"white"},"highlight":{},"theme-comscore":{},"links":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"*","description":"write something to remember"},"file":{"path":"Performance-Testing-Using-Apache-JMeter-master/PerformanceTest.md","mtime":"2020-05-15T10:09:57.670Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-15T10:10:55.472Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-links/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
