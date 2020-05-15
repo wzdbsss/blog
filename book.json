@@ -2,6 +2,7 @@
     "title": "Blog of wzdbsss",
     "description": "write something to remember",
     "language": "en-US",
+    "gitbook": "3.2.3",
     "structure": {
         "readme": "Java-NullPointerException-Debug.md"
     },
