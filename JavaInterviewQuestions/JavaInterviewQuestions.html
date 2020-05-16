@@ -1,0 +1,466 @@
+
+<!DOCTYPE HTML>
+<html lang="en-US" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Java Interview Questions · Blog of wzdbsss</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-links/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../StampedLockInJava8/StampedLockInJava8.html" />
+    
+    
+    <link rel="prev" href="../RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Java NullPointerException Debug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Performance-Testing-Using-Apache-JMeter-master/PerformanceTest.html">
+            
+                <a href="../Performance-Testing-Using-Apache-JMeter-master/PerformanceTest.html">
+            
+                    
+                    Performance Testing Using Apache JMeter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../DockerfileGracefulTermination.html">
+            
+                <a href="../DockerfileGracefulTermination.html">
+            
+                    
+                    Dockerfile graceful termination
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.html">
+            
+                <a href="../RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.html">
+            
+                    
+                    Remote Debug K8s Java Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5" data-path="JavaInterviewQuestions.html">
+            
+                <a href="JavaInterviewQuestions.html">
+            
+                    
+                    Java Interview Questions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../StampedLockInJava8/StampedLockInJava8.html">
+            
+                <a href="../StampedLockInJava8/StampedLockInJava8.html">
+            
+                    
+                    StampedLock in Java 8
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Java Interview Questions</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="java-interview-questions">Java Interview Questions</h1>
+<p><a href="https://docs.oracle.com/javase/tutorial/java/TOC.html" target="_blank">https://docs.oracle.com/javase/tutorial/java/TOC.html</a>
+<a href="https://docs.oracle.com/javase/tutorial/java/concepts/index.html" target="_blank">https://docs.oracle.com/javase/tutorial/java/concepts/index.html</a></p>
+<p><a href="https://www.tutorialspoint.com/java/java_interview_questions.htm" target="_blank">https://www.tutorialspoint.com/java/java_interview_questions.htm</a></p>
+<p><a href="https://www.javacodegeeks.com/2014/04/java-interview-questions-and-answers.html" target="_blank">https://www.javacodegeeks.com/2014/04/java-interview-questions-and-answers.html</a></p>
+<p><strong>Level 1 &#x2013; General Questions:</strong></p>
+<ol>
+<li><p>Why is Java a &#x201C;Platform Independent Programming Language&#x201D;?  What gives Java its &apos;write once and run anywhere&apos; nature?</p>
+<ul>
+<li>The bytecode.  Java is compiled to be a byte code which is the intermediate language between source code and machine code.</li>
+<li>Each Java source file is compiled into a bytecode file, which is executed by the JVM.</li>
+<li>The JVM provides the platform specific translation from bytecode to specific platform instructions.</li>
+<li>This byte code is not platform specific and hence can be fed to any platform.</li>
+</ul>
+</li>
+<li><p>What is a class?</p>
+<ul>
+<li>A class is a blue print from which individual objects are created.</li>
+<li>A class can contain fields and methods to describe the behavior of an object.</li>
+</ul>
+</li>
+<li><p>What is an interface?</p>
+<ul>
+<li>An interface is a contract between a class and the outside world</li>
+<li>An interface is a collection of abstract methods.</li>
+<li>A class implements an interface, thereby inheriting the abstract methods of the interface.</li>
+</ul>
+</li>
+<li><p>What is the advantage of using interfaces?</p>
+<ul>
+<li>Interfaces are mainly used to provide polymorphic behavior</li>
+<li>Implementing an interface allows a class to become more formal about the behavior it promises to provide</li>
+<li>Interfaces function to break up the complex designs and clear the dependencies between objects.</li>
+</ul>
+</li>
+<li><p>Describe 2 major API packages/frameworks in the Java (SE) core library:</p>
+<ul>
+<li>IO / NIO</li>
+<li>Collections API</li>
+<li>Concurrency</li>
+<li>UI Frameworks (not relevant to us):  AWT, Swing</li>
+<li><a href="http://www.moreprocess.com/programming/java/list-of-api-packages-in-core-java" target="_blank">http://www.moreprocess.com/programming/java/list-of-api-packages-in-core-java</a></li>
+</ul>
+</li>
+<li><p>Describe the minimum requirements for a simple Java program that can be executed.  How do you run it?</p>
+<ul>
+<li>Define a Java class with a &#x201C;main&#x201D; method.</li>
+<li>Compile with javac (or IDE), run with java/jre (or IDE)</li>
+</ul>
+</li>
+<li><p>What is the difference between JRE and JDK?</p>
+<ul>
+<li>JRE: Java Runtime Environment. It is basically the Java Virtual Machine where your Java programs run on. It also includes browser plugins for Applet execution.</li>
+<li>JDK: It&apos;s the full featured Software Development Kit for Java, including JRE, and the compilers and tools (like JavaDoc, and Java Debugger) to create and compile programs.</li>
+</ul>
+</li>
+<li><p>What are &#x201C;generics&#x201D;?  And what are they used for?</p>
+<ul>
+<li><a href="http://www.javainterview.in/p/generics-interview-questions.html" target="_blank">http://www.javainterview.in/p/generics-interview-questions.html</a></li>
+<li>Can developers create their own classes to accept generics?  Yes.   Can you explain how?</li>
+<li>Where do you see them used most often?   Collections API</li>
+</ul>
+</li>
+<li><p>What are &#x201C;annotations&#x201D;?   Give example.</p>
+<ul>
+<li>Annotations, a form of metadata, provide data about a program that is not part of the program itself.</li>
+<li>Uses:<ul>
+<li>Information for the compiler  (e.g. @Override)</li>
+<li>Compile-time and deployment-time processing</li>
+<li>Runtime processing --- they can be examined at runtime</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>What are some IDE&apos;s available for Java development?</p>
+<ul>
+<li>Eclipse, NetBeans, IntelliJ</li>
+</ul>
+</li>
+</ol>
+<p><strong>Level 2 &#x2013; Best Practices, Coding and Design</strong></p>
+<ol>
+<li><p>Describe some best practices around using the Java Collections framework - for best results, we should ask about specific Collections. i.e. Map, Set, List, etc</p>
+<ul>
+<li>&#x201C;Choosing the right type of the collection to use, based on the application&#x2019;s needs, is very crucial for its performance&#x201D;
+For example, don&#x2019;t choose ArrayList if frequent removal/inserts are done to middle of list</li>
+<li>&#x201C;Some collection classes allow us to specify their initial capacity. Thus, if we have an estimation on the number of elements that will be stored, we can use it to avoid rehashing or resizing&#x201D;</li>
+<li>&#x201C;Always use Generics for type-safety, readability, and robustness&#x201D;</li>
+<li>&#x201C;Program in terms of interface not implementation&#x201D;</li>
+</ul>
+</li>
+<li><p>In software design, what is meant by separation of concerns?  Give an example to illustrate.</p>
+<ul>
+<li><a href="https://effectivesoftwaredesign.com/2012/02/05/separation-of-concerns/" target="_blank">https://effectivesoftwaredesign.com/2012/02/05/separation-of-concerns/</a><ul>
+<li>The idea that a software system must be decomposed into parts that overlap in functionality as little as possible</li>
+</ul>
+</li>
+<li><a href="https://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank">https://en.wikipedia.org/wiki/Separation_of_concerns</a></li>
+</ul>
+</li>
+<li><p>Describe 2 design patterns (e.g. from GOF)</p>
+<ul>
+<li>Creation:  Singleton, Factory, Abstract Factory, Builder</li>
+<li>Structural: Adapter, Composite, Flyweight, Proxy</li>
+<li>Behavioral Patterns:  Iterator, Mediator, Observer, Template, Visitor</li>
+<li><a href="http://geekswithblogs.net/subodhnpushpak/archive/2009/09/18/the-23-gang-of-four-design-patterns-.-revisited.aspx" target="_blank">http://geekswithblogs.net/subodhnpushpak/archive/2009/09/18/the-23-gang-of-four-design-patterns-.-revisited.aspx</a></li>
+</ul>
+</li>
+</ol>
+<footer class="page-footer"><span class="copyright">&#xA9; wzdbsss all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified time: 
+2020-05-16 13:54:09
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.html" class="navigation navigation-prev " aria-label="Previous page: Remote Debug K8s Java Application">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../StampedLockInJava8/StampedLockInJava8.html" class="navigation navigation-next " aria-label="Next page: StampedLock in Java 8">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Java Interview Questions","level":"1.5","depth":1,"next":{"title":"StampedLock in Java 8","level":"1.6","depth":1,"path":"StampedLockInJava8/StampedLockInJava8.md","ref":"StampedLockInJava8/StampedLockInJava8.md","articles":[]},"previous":{"title":"Remote Debug K8s Java Application","level":"1.4","depth":1,"path":"RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.md","ref":"RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","fontsettings","livereload","github","-editlink","prism","-baidu","splitter","-sitemap","tbfed-pagefooter","-simple-page-toc","links","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css","ebook":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy wzdbsss","modify_label":"modified time: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"family":"serif","size":12,"theme":"white"},"highlight":{},"theme-comscore":{},"links":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"Java-NullPointerException-Debug.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"3.2.3","description":"write something to remember"},"file":{"path":"JavaInterviewQuestions/JavaInterviewQuestions.md","mtime":"2020-05-16T13:54:09.128Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-16T13:54:56.970Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-links/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+

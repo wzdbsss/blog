@@ -1,0 +1,614 @@
+
+<!DOCTYPE HTML>
+<html lang="en-US" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>StampedLock in Java 8 · Blog of wzdbsss</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-links/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="../JavaInterviewQuestions/JavaInterviewQuestions.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Java NullPointerException Debug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Performance-Testing-Using-Apache-JMeter-master/PerformanceTest.html">
+            
+                <a href="../Performance-Testing-Using-Apache-JMeter-master/PerformanceTest.html">
+            
+                    
+                    Performance Testing Using Apache JMeter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../DockerfileGracefulTermination.html">
+            
+                <a href="../DockerfileGracefulTermination.html">
+            
+                    
+                    Dockerfile graceful termination
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.html">
+            
+                <a href="../RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.html">
+            
+                    
+                    Remote Debug K8s Java Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../JavaInterviewQuestions/JavaInterviewQuestions.html">
+            
+                <a href="../JavaInterviewQuestions/JavaInterviewQuestions.html">
+            
+                    
+                    Java Interview Questions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.6" data-path="StampedLockInJava8.html">
+            
+                <a href="StampedLockInJava8.html">
+            
+                    
+                    StampedLock in Java 8
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >StampedLock in Java 8</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="introduction">Introduction</h1>
+<p>StampedLock was introduced in Java 8 and has been one of the most important features of the concurrent family.</p>
+<h1 id="why-lock-is-needed">Why Lock is needed?</h1>
+<h2 id="problems-without-lock">Problems without Lock</h2>
+<ul>
+<li>Inconsistency</li>
+</ul>
+<p>Demonstrate by Example</p>
+<p><strong>ExampleWithoutLock.java</strong></p>
+<pre class="language-"><code class="lang-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExampleWithoutLock</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span> </span>{
+  <span class="hljs-meta">@Getter</span>
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;
+
+  <span class="hljs-meta">@Override</span>
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+    count = count + <span class="hljs-number">1</span>;
+  }
+}
+</code></pre>
+<p><strong>MainTask.java</strong></p>
+<pre class="language-"><code class="lang-java">ExecutorService executor = Executors.newFixedThreadPool(<span class="hljs-number">3</span>);
+
+ExampleWithoutLock exampleWithoutLock = <span class="hljs-keyword">new</span> ExampleWithoutLock();
+
+IntStream.range(<span class="hljs-number">0</span>, <span class="hljs-number">10000</span>)
+    .forEach(i -&gt; executor.submit(exampleWithoutLock::run));
+
+<span class="hljs-comment">// Wait for the job to finish</span>
+<span class="hljs-keyword">try</span> {
+    TimeUnit.SECONDS.sleep(<span class="hljs-number">10</span>);
+} <span class="hljs-keyword">catch</span> (InterruptedException e) {
+    e.printStackTrace();
+}
+
+System.out.println(exampleWithoutLock.getCount());  <span class="hljs-comment">// 9900</span>
+</code></pre>
+<h2 id="problems-with-lock">Problems with Lock</h2>
+<ul>
+<li>Deadlock</li>
+<li>Starvation</li>
+</ul>
+<h1 id="comparing-other-mechanisms">Comparing other mechanisms</h1>
+<h2 id="synchronized">synchronized</h2>
+<p><strong>ExampleWithSynchronized.java</strong></p>
+<pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+  count = count + <span class="hljs-number">1</span>;
+}
+</code></pre>
+<h2 id="reentrantlock">ReentrantLock</h2>
+<p><strong>ExampleWithReentrantLock.java</strong></p>
+<pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+  reentrantLock.lock();
+  <span class="hljs-keyword">try</span> {
+    count = count + <span class="hljs-number">1</span>;
+  } <span class="hljs-keyword">finally</span>{
+    reentrantLock.unlock();
+  }
+}
+</code></pre>
+<p>The class <code>ReentrantLock</code> is a mutual exclusion lock with the same basic behavior as the implicit monitors accessed via the <code>synchronized</code> keyword but with extended capabilities.
+This method is thread-safe just like the synchronized counterpart. If another thread has already acquired the lock subsequent calls to <code>lock()</code> pause the current thread until the lock has been unlocked. Only one thread can hold the lock at any given time.
+The constructor for this class accepts an optional <em>fairness</em> parameter. When set <code>true</code>, under contention, locks favor granting access to the longest-waiting thread. Otherwise this lock does not guarantee any particular access order. 
+It supports various methods for fine grained control:</p>
+<ul>
+<li>tryLock</li>
+<li>isHeldByCurrentThread</li>
+<li>isLocked </li>
+<li>newCondition </li>
+<li>getQueuedThreads </li>
+<li>getWaitingThreads(Condition condition)  </li>
+</ul>
+<h2 id="reentrantreadwritelock">ReentrantReadWriteLock</h2>
+<p>The idea behind read-write locks is that it&apos;s usually safe to read mutable variables concurrently as long as nobody is writing to this variable. So the read-lock can be held simultaneously by multiple threads as long as no threads hold the write-lock. This can improve performance and throughput in case that reads are more frequent than writes.</p>
+<p><strong>ExampleWithReentrantReadWriteLock.java</strong></p>
+<pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+  reentrantReadWriteLock.writeLock().lock();
+  <span class="hljs-keyword">try</span> {
+    count = count + <span class="hljs-number">1</span>;
+  } <span class="hljs-keyword">finally</span>{
+    reentrantReadWriteLock.writeLock().unlock();
+  }
+}
+</code></pre>
+<p>Example: 1 writer and 2 readers</p>
+<p><strong>MultipleReaders.java</strong></p>
+<pre class="language-"><code class="lang-java">Map&lt;String, String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+ReadWriteLock lock = <span class="hljs-keyword">new</span> ReentrantReadWriteLock();
+
+executor.submit(() -&gt; {
+  lock.writeLock().lock();
+  <span class="hljs-keyword">try</span> {
+    System.out.println(currentThread().getName() + <span class="hljs-string">&quot;: start&quot;</span>);
+    sleep(<span class="hljs-number">100</span>);
+    map.put(<span class="hljs-string">&quot;foo&quot;</span>, <span class="hljs-string">&quot;bar&quot;</span>);
+    System.out.println(currentThread().getName() + <span class="hljs-string">&quot;: end&quot;</span>);
+  } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+    e.printStackTrace();
+  } <span class="hljs-keyword">finally</span> {
+    lock.writeLock().unlock();
+  }
+});
+
+Runnable readTask = () -&gt; {
+  lock.readLock().lock();
+  <span class="hljs-keyword">try</span> {
+    System.out.println(currentThread().getName() + <span class="hljs-string">&quot;: &quot;</span> + map.get(<span class="hljs-string">&quot;foo&quot;</span>));
+    sleep(<span class="hljs-number">100</span>);
+    System.out.println(currentThread().getName()+ <span class="hljs-string">&quot;: end&quot;</span>);
+  } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+    e.printStackTrace();
+  } <span class="hljs-keyword">finally</span> {
+    lock.readLock().unlock();
+  }
+};
+
+executor.submit(readTask);
+executor.submit(readTask);
+</code></pre>
+<p>Output</p>
+<p><strong>Output.txt</strong></p>
+<pre class="language-"><code class="lang-java">pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">2</span>: start
+pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">2</span>: end
+pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">3</span>: bar
+pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">1</span>: bar
+pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">3</span>: end
+pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">1</span>: end
+</code></pre>
+<h2 id="stampedlock">StampedLock</h2>
+<p><strong>ExampleWithStampedLock.java</strong></p>
+<pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">long</span> stamp = stampedLock.writeLock();
+  <span class="hljs-keyword">try</span> {
+    count = count + <span class="hljs-number">1</span>;
+  } <span class="hljs-keyword">finally</span>{
+    stampedLock.unlockWrite(stamp);
+  }
+}
+</code></pre>
+<h2 id="summary">Summary</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Reentrant?</th>
+<th>Support Condition?</th>
+<th>Support R/W Lock?</th>
+<th>Who can release?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>synchronized</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>NA</td>
+</tr>
+<tr>
+<td>ReentrantLock</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Only owner thread</td>
+</tr>
+<tr>
+<td>ReentrantReadWriteLock</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Only owner thread</td>
+</tr>
+<tr>
+<td>StampedLock</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+<td>Any thread (But not suggested to do)</td>
+</tr>
+</tbody>
+</table>
+<h1 id="deep-insight-into-stampedlock">Deep insight into StampedLock</h1>
+<h2 id="tryoptimisticread">tryOptimisticRead</h2>
+<p>The optimistic lock is valid right after acquiring the lock. In contrast to normal read locks an optimistic lock doesn&apos;t prevent other threads to obtain a write lock instantaneously. After sending the first thread to sleep for one second the second thread obtains a write lock without waiting for the optimistic read lock to be released. From this point the optimistic read lock is no longer valid. Even when the write lock is released the optimistic read locks stays invalid.
+So when working with optimistic locks you have to validate the lock every time <em>before</em> accessing any shared mutable variable to make sure the read was still valid.</p>
+<p><strong>OptimisticRead.java</strong></p>
+<pre class="language-"><code class="lang-java"><span class="hljs-comment">// Optimistic read</span>
+StampedLock stampedLock = <span class="hljs-keyword">new</span> StampedLock();
+
+executor.submit(() -&gt; {
+  <span class="hljs-keyword">long</span> stamp = stampedLock.tryOptimisticRead();
+  <span class="hljs-keyword">try</span> {
+    System.out.println(<span class="hljs-string">&quot;Optimistic Lock Valid: &quot;</span> + stampedLock.validate(stamp));
+    sleep(<span class="hljs-number">100</span>);
+    System.out.println(<span class="hljs-string">&quot;Optimistic Lock Valid: &quot;</span> + stampedLock.validate(stamp));
+    sleep(<span class="hljs-number">200</span>);
+    System.out.println(<span class="hljs-string">&quot;Optimistic Lock Valid: &quot;</span> + stampedLock.validate(stamp));
+  } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+    e.printStackTrace();
+  } <span class="hljs-keyword">finally</span> {
+    stampedLock.unlock(stamp);
+  }
+});
+
+executor.submit(() -&gt; {
+  <span class="hljs-keyword">long</span> stamp = stampedLock.writeLock();
+  <span class="hljs-keyword">try</span> {
+    System.out.println(<span class="hljs-string">&quot;Write Lock acquired&quot;</span>);
+    sleep(<span class="hljs-number">200</span>);
+  } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+    e.printStackTrace();
+  } <span class="hljs-keyword">finally</span> {
+    stampedLock.unlock(stamp);
+    System.out.println(<span class="hljs-string">&quot;Write done&quot;</span>);
+  }
+});
+</code></pre>
+<p>Output</p>
+<p><strong>Output.txt</strong></p>
+<pre class="language-"><code>Optimistic Lock Valid: true
+Write Lock acquired
+Optimistic Lock Valid: false
+Write done
+Optimistic Lock Valid: false
+</code></pre><h2 id="tryconverttowritelock">tryConvertToWriteLock</h2>
+<p>Sometimes it&apos;s useful to convert a read lock into a write lock without unlocking and locking again. <code>StampedLock</code> provides the method <code>tryConvertToWriteLock()</code> for that purpose.</p>
+<p><strong>ConvertToWriteLock.java</strong></p>
+<pre class="language-"><code class="lang-java"><span class="hljs-comment">// Convert to write lock</span>
+executor.submit(() -&gt; {
+  <span class="hljs-keyword">long</span> stamp = stampedLock.readLock();
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">if</span> (testValue == <span class="hljs-number">0</span>) {
+      stamp = stampedLock.tryConvertToWriteLock(stamp);
+      <span class="hljs-keyword">if</span> (stampedLock.validate(stamp)) {
+        testValue = <span class="hljs-number">23</span>;
+      } <span class="hljs-keyword">else</span> {
+        System.out.println(<span class="hljs-string">&quot;Could not convert to write lock&quot;</span>);
+        stamp = stampedLock.writeLock();
+      }
+    }
+    System.out.println(testValue);
+  } <span class="hljs-keyword">finally</span> {
+    stampedLock.unlock(stamp);
+  }
+});
+</code></pre>
+<p>Can you find bug?
+There is a bug in above code, are you able to recognize?</p>
+<h1 id="best-practice">Best Practice</h1>
+<ul>
+<li>If readers are much more than writers, StampedLock is preferred.</li>
+<li>StampedLock is not reentrant, so each call to acquire the lock always returns a new stamp and blocks if there&apos;s no lock available, even if the same thread already holds a lock, which may lead to deadlock.</li>
+<li>Never use the same variable to save the stamp value returned by StampedLock API.</li>
+<li>There could be a situation when you acquired the write lock and written something and you wanted to read in the same critical section. So, as to not break the potential concurrent access, we can use the <em>tryConvertToReadLock(long stamp)</em> method to acquire read access. Now suppose you acquired the read lock, and after a successful read, you wanted to change the value. To do so, you need a write lock, which you can acquire using the <em>tryConvertToWriteLock(long stamp)</em> method.</li>
+<li>One thing to note is that the <em>tryConvertToReadLock(long stamp)</em> and <em>tryConvertToWriteLock(long stamp)</em> methods will not block and may return the stamp as zero, which means these calls were not successful.</li>
+<li>The stamp returned by <em>tryOptimisticRead()</em> <strong>should not</strong> apply to <em>unlock(long stamp)</em>.</li>
+<li>If there is read lock held by others, one thread have valid optimistic read, this thread can obtain read lock by calling <em>readLock()</em>, while cannot obtain read lock by calling <em>tryConvertToReadLock(long stamp)</em>.</li>
+</ul>
+<h1 id="reference">Reference</h1>
+<p>Try Block with Lock: <a href="https://stackoverflow.com/questions/10868423/lock-lock-before-try" target="_blank">https://stackoverflow.com/questions/10868423/lock-lock-before-try</a> </p>
+<footer class="page-footer"><span class="copyright">&#xA9; wzdbsss all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified time: 
+2020-05-16 13:54:09
+</span></footer>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../JavaInterviewQuestions/JavaInterviewQuestions.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Java Interview Questions">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"StampedLock in Java 8","level":"1.6","depth":1,"previous":{"title":"Java Interview Questions","level":"1.5","depth":1,"path":"JavaInterviewQuestions/JavaInterviewQuestions.md","ref":"JavaInterviewQuestions/JavaInterviewQuestions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","fontsettings","livereload","github","-editlink","prism","-baidu","splitter","-sitemap","tbfed-pagefooter","-simple-page-toc","links","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css","ebook":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy wzdbsss","modify_label":"modified time: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"family":"serif","size":12,"theme":"white"},"highlight":{},"theme-comscore":{},"links":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"Java-NullPointerException-Debug.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"3.2.3","description":"write something to remember"},"file":{"path":"StampedLockInJava8/StampedLockInJava8.md","mtime":"2020-05-16T13:54:09.136Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-16T13:54:56.970Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-links/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
