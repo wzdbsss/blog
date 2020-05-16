@@ -2,9 +2,6 @@
 .gitbook-link {
   display: none !important;
 }
-.summary > li:nth-child(4) {
-  display: none !important;
-}
 li.chapter {
   padding-left: 20px;
 }
