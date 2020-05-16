@@ -210,41 +210,37 @@
 <p><strong>Recommended Way:</strong></p>
 <ol>
 <li><p>Install <strong>kubectl</strong>, get kubeconfig and write to file <code>~/.kube/config</code>, then you can get cluster information by running <code>$ kubectl cluster-info</code></p>
-<pre class="language-"><code class="lang-bash">$ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/windows/amd64/kubectl.exe
+<pre class="language-"><code class="lang-bash"> $ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/windows/amd64/kubectl.exe
 </code></pre>
-<p>then add to system env.</p>
+<p> then add to system env.</p>
 </li>
 <li><p>From <strong>IDEA</strong>, create remote debug attaching to <code>localhost:&lt;port&gt;</code>, you will get JDK5~8 command line arguments <code>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9090</code></p>
 </li>
-<li><p>Update <strong>Dockerfile</strong> to add arguments</p>
+<li><p>Update <strong>Dockerfile</strong> to add arguments  </p>
+<pre class="language-"><code> FROM openjdk:8-jdk-alpine
+
+ ARG JAVA_ENABLE_DEBUG=false
+ ENV JAVA_ENABLE_DEBUG ${JAVA_ENABLE_DEBUG}
+
+ ADD ./dockerdemo-0.0.1-SNAPSHOT.jar demo.jar
+
+ ENTRYPOINT if [ &quot;${JAVA_ENABLE_DEBUG}&quot; = &quot;true&quot; ]; then \
+                java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9090 -Djava.security.egd=file:/dev/./urandom -jar /demo.jar; \
+            else \
+                java -Djava.security.egd=file:/dev/./urandom -jar /demo.jar; \
+            fi
+
+ EXPOSE 8080
+</code></pre></li>
+<li><p>Update K8s Pod <strong>yaml</strong> file and add JAVA_ENABLE_DEBUG as true</p>
+<pre class="language-"><code>     ports:
+        - containerPort: 5000
+          protocol: TCP
+       - containerPort: 9090
+          name: jvm-debug
+          protocol: TCP
+</code></pre><p> <img src="ports.png" alt="port"></p>
 </li>
-</ol>
-<pre class="language-"><code class="lang-bash">FROM openjdk:8-jdk-alpine
-
-ARG JAVA_ENABLE_DEBUG=<span class="hljs-literal">false</span>
-ENV JAVA_ENABLE_DEBUG <span class="hljs-variable">${JAVA_ENABLE_DEBUG}</span>
-
-ADD ./dockerdemo-0.0.1-SNAPSHOT.jar demo.jar
-
-ENTRYPOINT <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">${JAVA_ENABLE_DEBUG}</span>&quot;</span> = <span class="hljs-string">&quot;true&quot;</span> ]; <span class="hljs-keyword">then</span> \
-               java -agentlib:jdwp=transport=dt_socket,server=y,<span class="hljs-built_in">suspend</span>=n,address=9090 -Djava.security.egd=file:/dev/./urandom -jar /demo.jar; \
-           <span class="hljs-keyword">else</span> \
-               java -Djava.security.egd=file:/dev/./urandom -jar /demo.jar; \
-           <span class="hljs-keyword">fi</span>
-
-EXPOSE 8080
-</code></pre>
-<ol>
-<li>Update K8s Pod <strong>yaml</strong>file and add JAVA_ENABLE_DEBUG as true</li>
-</ol>
-<pre class="language-"><code>    ports:
-       - containerPort: 5000
-         protocol: TCP
-      - containerPort: 9090
-         name: jvm-debug
-         protocol: TCP
-</code></pre><p><img src="ports.png" alt="port"></p>
-<ol>
 <li><p>After started, getting pod by running <code>$ kubectl get pod [-o wide]</code> and forward local port to remote port by running <code>$ kubectl port-forward &lt;pod&gt; &lt;localpot&gt;:&lt;remoteport&gt;</code></p>
 </li>
 <li><p>Run remote debug from IDEA, you will get <code>Connected to the target VM, address: &apos;localhost:9090&apos;, transport: &apos;socket&apos;</code> upon success.</p>
@@ -258,11 +254,9 @@ EXPOSE 8080
 <li><p>add remote debug
 <img src="ideaconfig_2.png" alt=""></p>
 </li>
-<li><p>made the settings as marked by yellow</p>
-<ol>
-<li>Host &amp; Port is the IP address of the service external endpoints in k8s.
-<img src="ideaconfig_3.png" alt=""></li>
-</ol>
+<li><p>made the settings as marked by yellow
+Host &amp; Port is the IP address of the service external endpoints in k8s.
+<img src="ideaconfig_3.png" alt=""></p>
 </li>
 <li><p>get the &quot;Command Line arguments for remote JVM&quot; in above screenshot and put into your Dockerfile as below:
  CMD [&quot;java&quot;,&quot;-jar&quot;,&quot;-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5000&quot;,&quot;-Djava.security.egd=file:/dev/./urandom&quot;,&quot;/devcockpitsvc-3.0.5.jar&quot;]</p>
@@ -270,19 +264,16 @@ EXPOSE 8080
 <li><p>build docker image and deploy.</p>
 </li>
 <li><p>(might needs)restart service in k8s</p>
-<p> click 
-<img src="k8s_1.png" alt=""></p>
+<p> <img src="k8s_1.png" alt=""></p>
+<p> <img src="k8s_2.png" alt=""></p>
+<p> to restart service need to kill it </p>
+<p> <img src="k8s_3.png" alt="">  </p>
 </li>
-</ol>
-<p><img src="k8s_2.png" alt=""></p>
-<pre class="language-"><code>to restart service need to kill it 
-</code></pre><p><img src="k8s_3.png" alt="">  </p>
-<ol>
 <li>start the remote debug task when your service starts to run, and you will see connected:
-<img src="idea_4.png" alt=""> </li>
+<img src="idea_4.png" alt=""></li>
 </ol>
 <footer class="page-footer"><span class="copyright">&#xA9; wzdbsss all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">modified time: 
-2020-05-16 13:02:33
+2020-05-16 13:22:27
 </span></footer>
                                 
                                 </section>
@@ -338,7 +329,7 @@ EXPOSE 8080
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Remote Debug K8s Java Application","level":"1.4","depth":1,"previous":{"title":"Dockerfile graceful termination","level":"1.3","depth":1,"path":"DockerfileGracefulTermination.md","ref":"DockerfileGracefulTermination.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","fontsettings","livereload","github","-editlink","prism","-baidu","splitter","-sitemap","tbfed-pagefooter","-simple-page-toc","links","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css","ebook":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy wzdbsss","modify_label":"modified time: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"family":"serif","size":12,"theme":"white"},"highlight":{},"theme-comscore":{},"links":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"Java-NullPointerException-Debug.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"3.2.3","description":"write something to remember"},"file":{"path":"RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.md","mtime":"2020-05-16T13:02:33.292Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-16T13:03:23.919Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Remote Debug K8s Java Application","level":"1.4","depth":1,"previous":{"title":"Dockerfile graceful termination","level":"1.3","depth":1,"path":"DockerfileGracefulTermination.md","ref":"DockerfileGracefulTermination.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","fontsettings","livereload","github","-editlink","prism","-baidu","splitter","-sitemap","tbfed-pagefooter","-simple-page-toc","links","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css","ebook":"styles/website.css"},"pluginsConfig":{"tbfed-pagefooter":{"copyright":"&copy wzdbsss","modify_label":"modified time: ","modify_format":"YYYY-MM-DD HH:mm:ss"},"prism":{},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"family":"serif","size":12,"theme":"white"},"highlight":{},"theme-comscore":{},"links":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"Java-NullPointerException-Debug.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"3.2.3","description":"write something to remember"},"file":{"path":"RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.md","mtime":"2020-05-16T13:22:27.826Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-16T13:23:13.324Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
