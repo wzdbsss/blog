@@ -13,11 +13,10 @@
         "-fontsettings",
         "livereload",
         "github",
-        "-editlink",
         "prism",
         "-baidu",
         "splitter",
-        "-sitemap",
+        "-expandable-chapters",
         "-tbfed-pagefooter",
         "-simple-page-toc",
         "-links",
@@ -25,8 +24,7 @@
         "theme-comscore"
     ],
     "styles": {
-        "website": "styles/website.css",
-        "ebook": "styles/website.css"
+        "website": "styles/website.css"
     },
     "pluginsConfig": {
         "simple-page-toc": {
