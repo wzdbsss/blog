@@ -2,7 +2,7 @@
 
 This page provide a way to using IDEA detach debug mode to debug java application that runs on Alibaba K8s cluster.
 
-**Recommended Way:**
+## Recommended Way
 
 1. Install **kubectl**, get kubeconfig and write to file `~/.kube/config`, then you can get cluster information by running `$ kubectl cluster-info`
     ``` bash
@@ -45,7 +45,7 @@ This page provide a way to using IDEA detach debug mode to debug java applicatio
 
 6. Run remote debug from IDEA, you will get `Connected to the target VM, address: 'localhost:9090', transport: 'socket'` upon success.
 
-**Another Way:**
+## Another Way
 
 1.  open project configuration
 ![](./ideaconfig_1.png)
