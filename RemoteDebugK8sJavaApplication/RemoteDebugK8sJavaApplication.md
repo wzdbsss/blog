@@ -4,12 +4,10 @@ This page provide a way to using IDEA detach debug mode to debug java applicatio
 
 ## Recommended Way
 
-1. Install **kubectl**, get kubeconfig and write to file `~/.kube/config`, then you can get cluster information by running `$ kubectl cluster-info`
+1. Install **kubectl**, get kubeconfig and write to file `~/.kube/config`, then we can get the cluster information by command `$ kubectl cluster-info`
     ``` bash
     $ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/windows/amd64/kubectl.exe
     ```
-
-    then add to system env.
 2. From **IDEA**, create remote debug attaching to `localhost:<port>`, you will get JDK5~8 command line arguments `-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9090`
 
 3. Update **Dockerfile** to add arguments  
@@ -32,28 +30,28 @@ This page provide a way to using IDEA detach debug mode to debug java applicatio
 
 4. Update K8s Pod **yaml** file and add JAVA_ENABLE_DEBUG as true
     ```
-        ports:
-           - containerPort: 5000
-             protocol: TCP
-          - containerPort: 9090
-             name: jvm-debug
-             protocol: TCP
+    ports:
+      - containerPort: 5000
+         protocol: TCP
+      - containerPort: 9090
+         name: jvm-debug
+         protocol: TCP
     ```
     ![port](ports.png)
 
-5. After started, getting pod by running `$ kubectl get pod [-o wide]` and forward local port to remote port by running `$ kubectl port-forward <pod> <localpot>:<remoteport>`
+5. Getting pod status by `$ kubectl get pod [-o wide]`, and forward local port to remote port by running `$ kubectl port-forward <pod> <localpot>:<remoteport>`
 
-6. Run remote debug from IDEA, you will get `Connected to the target VM, address: 'localhost:9090', transport: 'socket'` upon success.
+6. Run remote debug from IDEA, the message `Connected to the target VM, address: 'localhost:9090', transport: 'socket'` means we can debug from IDEA now.
 
 ## Another Way
 
-1.  open project configuration
+1. open project configuration
 ![](./ideaconfig_1.png)
 
-2.  add remote debug
+2. add remote debug
 ![](./ideaconfig_2.png)
 
-3.  made the settings as marked by yellow
+3. made the settings as marked by yellow
     Host & Port is the IP address of the service external endpoints in k8s.
     ![](./ideaconfig_3.png)
 

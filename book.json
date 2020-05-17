@@ -20,7 +20,7 @@
         "-expandable-chapters",
         "-tbfed-pagefooter",
         "-simple-page-toc",
-        "anchor-navigation-ex",
+        "-anchor-navigation-ex",
         "-copy-code-button",
         "theme-comscore"
     ],
