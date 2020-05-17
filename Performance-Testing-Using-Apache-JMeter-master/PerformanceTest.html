@@ -25,11 +25,15 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-base16-ateliersulphurpool.light.css">
                 
             
                 
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
                 
             
                 
@@ -232,14 +236,14 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="performance-testing-using-apache-jmeter">Performance Testing Using Apache JMeter</h1>
-<h2 id="getting-start">Getting Start</h2>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#performance-testing-using-apache-jmeter"><b>1. </b>Performance Testing Using Apache JMeter</a></li><ul><li><span class="title-icon "></span><a href="#getting-start"><b>1.1. </b>Getting Start</a></li><li><span class="title-icon "></span><a href="#example-case-for-pattern-matching"><b>1.2. </b>Example case for pattern matching</a></li><li><span class="title-icon "></span><a href="#distributed-testing"><b>1.3. </b>Distributed Testing</a></li><li><span class="title-icon "></span><a href="#troubleshooting"><b>1.4. </b>Troubleshooting</a></li></ul></ul></div><a href="#performance-testing-using-apache-jmeter" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="performance-testing-using-apache-jmeter"><a name="performance-testing-using-apache-jmeter" class="anchor-navigation-ex-anchor" href="#performance-testing-using-apache-jmeter"><i class="fa fa-link" aria-hidden="true"></i></a>1. Performance Testing Using Apache JMeter</h1>
+<h2 id="getting-start"><a name="getting-start" class="anchor-navigation-ex-anchor" href="#getting-start"><i class="fa fa-link" aria-hidden="true"></i></a>1.1. Getting Start</h2>
 <ul>
 <li>Download and install Apache JMeter from <a href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank">http://jmeter.apache.org/download_jmeter.cgi</a>.</li>
 <li>Get a quick start at <a href="https://gojira.siemens.com/mindsphere_wiki/pages/viewpage.action?pageId=43426712" target="_blank">Performance testing tutorial (step by step)</a>,
 and you can get a full help at official website <a href="https://jmeter.apache.org/usermanual" target="_blank">https://jmeter.apache.org/usermanual</a></li>
 </ul>
-<h2 id="example-case-for-pattern-matching">Example case for pattern matching</h2>
+<h2 id="example-case-for-pattern-matching"><a name="example-case-for-pattern-matching" class="anchor-navigation-ex-anchor" href="#example-case-for-pattern-matching"><i class="fa fa-link" aria-hidden="true"></i></a>1.2. Example case for pattern matching</h2>
 <ul>
 <li>Here we explore a more completely one. Download the example JMX <a href="Patternmatching.jmx">Patternmatching.jmx</a> and open it in your JMeter. In the first step we configure some variables and these variables can be refered by ${variable_key} in Jmeter. Then get web token from auth server before we start loading test, add a Thread Group and configure a HTTP Request as below.
 <img src="3.png" alt="User Defined Variables">  </li>
@@ -249,19 +253,19 @@ and you can get a full help at official website <a href="https://jmeter.apache.o
 <li>Open terminal type <code>jmeter -n -t Patternmatching.jmx -l Patternmatching.csv -e -o result</code> to start test. <code>Patternmatching.csv</code> is log file samples which could be use for further analyzing, there is also a <a href="result/index.html">report dashboard</a> after loading test.
 <img src="8.png" alt="User Defined Variables"></li>
 </ul>
-<h2 id="distributed-testing">Distributed Testing</h2>
+<h2 id="distributed-testing"><a name="distributed-testing" class="anchor-navigation-ex-anchor" href="#distributed-testing"><i class="fa fa-link" aria-hidden="true"></i></a>1.3. Distributed Testing</h2>
 <p>Distributed testing allows for testing in a distributed environment. In a typical distributed environment, there are different machines each running a test engine instance and controlled by one primary machine or node. Distributed testing comes in handy when you have large number of users to simulate and test and a single machine is not good enough to handle such load. You can distribute the tests on different nodes The different nodes are controlled or managed by one single client node.</p>
-<h4 id="start-slave-nodes">Start slave nodes</h4>
+<h4 id="start-slave-nodes"><a name="start-slave-nodes" class="anchor-navigation-ex-anchor" href="#start-slave-nodes"><i class="fa fa-link" aria-hidden="true"></i></a>Start slave nodes</h4>
 <ul>
 <li>visit /bin directory to edit jmeter.properties file, disable JMeter running on a remote server over SSH by <code>server.rmi.ssl.disable=true</code></li>
 <li>on each slave node start JMeter server with <code>apache-jmeter-4.0/bin/jmeter-server -Djava.rmi.server.hostname=${slave_ip}</code></li>
 </ul>
-<h4 id="start-master">Start master</h4>
+<h4 id="start-master"><a name="start-master" class="anchor-navigation-ex-anchor" href="#start-master"><i class="fa fa-link" aria-hidden="true"></i></a>Start master</h4>
 <ul>
 <li>visit /bin directory to edit jmeter.properties file, disable JMeter running on a remote server over SSH as last step, adds IP slave machine as shown below: <code>remote_hosts=${slave_ips}</code></li>
 <li>then start loading test with<br><code>apache-jmeter-4.0/bin/jmeter -n -t /home/jmeter_master/jmeter/plan/Patternmatching.jmx -l /home/jmeter_master/jmeter/results/Patternmatching.csv -e -o /home/jmeter_master/jmeter/results/ -X -r</code></li>
 </ul>
-<h2 id="troubleshooting">Troubleshooting</h2>
+<h2 id="troubleshooting"><a name="troubleshooting" class="anchor-navigation-ex-anchor" href="#troubleshooting"><i class="fa fa-link" aria-hidden="true"></i></a>1.4. Troubleshooting</h2>
 <ul>
 <li>Always open jmeter(Unix)/jmeter.bat(Windows) to use Jmeter.</li>
 <li>Don&apos;t use GUI mode for load testing, only for Test creation and Test debugging.</li>
@@ -327,7 +331,7 @@ and you can get a full help at official website <a href="https://jmeter.apache.o
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Performance Testing Using Apache JMeter","level":"1.2","depth":1,"next":{"title":"Dockerfile graceful termination","level":"1.3","depth":1,"path":"DockerfileGracefulTermination.md","ref":"DockerfileGracefulTermination.md","articles":[]},"previous":{"title":"Java NullPointerException Debug","level":"1.1","depth":1,"path":"Java-NullPointerException-Debug.md","ref":"Java-NullPointerException-Debug.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","-fontsettings","livereload","github","prism","-baidu","splitter","-expandable-chapters","-tbfed-pagefooter","-simple-page-toc","-links","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"theme-comscore":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"Java-NullPointerException-Debug.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"3.2.3","description":"write something to remember"},"file":{"path":"Performance-Testing-Using-Apache-JMeter-master/PerformanceTest.md","mtime":"2020-05-17T08:57:41.604Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-17T08:58:28.632Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Performance Testing Using Apache JMeter","level":"1.2","depth":1,"next":{"title":"Dockerfile graceful termination","level":"1.3","depth":1,"path":"DockerfileGracefulTermination.md","ref":"DockerfileGracefulTermination.md","articles":[]},"previous":{"title":"Java NullPointerException Debug","level":"1.1","depth":1,"path":"Java-NullPointerException-Debug.md","ref":"Java-NullPointerException-Debug.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","-fontsettings","livereload","github","prism","prism-themes","-page-treeview","splitter","-expandable-chapters","-tbfed-pagefooter","-simple-page-toc","anchor-navigation-ex","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-base16-ateliersulphurpool.light.css"]},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"theme-comscore":{},"prism-themes":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"Java-NullPointerException-Debug.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"3.2.3","description":"write something to remember"},"file":{"path":"Performance-Testing-Using-Apache-JMeter-master/PerformanceTest.md","mtime":"2020-05-17T09:35:58.164Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-17T09:36:44.090Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

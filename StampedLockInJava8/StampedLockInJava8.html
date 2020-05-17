@@ -25,11 +25,15 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-base16-ateliersulphurpool.light.css">
                 
             
                 
                 <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchor-navigation-ex/style/plugin.css">
                 
             
                 
@@ -232,10 +236,10 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="introduction">Introduction</h1>
+                                <div id="anchor-navigation-ex-navbar"><i class="fa fa-navicon"></i><ul><li><span class="title-icon "></span><a href="#introduction"><b>1. </b>Introduction</a></li><li><span class="title-icon "></span><a href="#why-lock-is-needed"><b>2. </b>Why Lock is needed?</a></li><ul><li><span class="title-icon "></span><a href="#problems-without-lock"><b>2.1. </b>Problems without Lock</a></li><li><span class="title-icon "></span><a href="#problems-with-lock"><b>2.2. </b>Problems with Lock</a></li></ul><li><span class="title-icon "></span><a href="#comparing-other-mechanisms"><b>3. </b>Comparing other mechanisms</a></li><ul><li><span class="title-icon "></span><a href="#synchronized"><b>3.1. </b>synchronized</a></li><li><span class="title-icon "></span><a href="#reentrantlock"><b>3.2. </b>ReentrantLock</a></li><li><span class="title-icon "></span><a href="#reentrantreadwritelock"><b>3.3. </b>ReentrantReadWriteLock</a></li><li><span class="title-icon "></span><a href="#stampedlock"><b>3.4. </b>StampedLock</a></li><li><span class="title-icon "></span><a href="#summary"><b>3.5. </b>Summary</a></li></ul><li><span class="title-icon "></span><a href="#deep-insight-into-stampedlock"><b>4. </b>Deep insight into StampedLock</a></li><ul><li><span class="title-icon "></span><a href="#tryoptimisticread"><b>4.1. </b>tryOptimisticRead</a></li><li><span class="title-icon "></span><a href="#tryconverttowritelock"><b>4.2. </b>tryConvertToWriteLock</a></li></ul><li><span class="title-icon "></span><a href="#best-practice"><b>5. </b>Best Practice</a></li><li><span class="title-icon "></span><a href="#reference"><b>6. </b>Reference</a></li></ul></div><a href="#introduction" id="anchorNavigationExGoTop"><i class="fa fa-arrow-up"></i></a><h1 id="introduction"><a name="introduction" class="anchor-navigation-ex-anchor" href="#introduction"><i class="fa fa-link" aria-hidden="true"></i></a>1. Introduction</h1>
 <p>StampedLock was introduced in Java 8 and has been one of the most important features of the concurrent family.</p>
-<h1 id="why-lock-is-needed">Why Lock is needed?</h1>
-<h2 id="problems-without-lock">Problems without Lock</h2>
+<h1 id="why-lock-is-needed"><a name="why-lock-is-needed" class="anchor-navigation-ex-anchor" href="#why-lock-is-needed"><i class="fa fa-link" aria-hidden="true"></i></a>2. Why Lock is needed?</h1>
+<h2 id="problems-without-lock"><a name="problems-without-lock" class="anchor-navigation-ex-anchor" href="#problems-without-lock"><i class="fa fa-link" aria-hidden="true"></i></a>2.1. Problems without Lock</h2>
 <ul>
 <li>Inconsistency</li>
 </ul>
@@ -268,20 +272,20 @@ IntStream.range(<span class="hljs-number">0</span>, <span class="hljs-number">10
 
 System.out.println(exampleWithoutLock.getCount());  <span class="hljs-comment">// 9900</span>
 </code></pre>
-<h2 id="problems-with-lock">Problems with Lock</h2>
+<h2 id="problems-with-lock"><a name="problems-with-lock" class="anchor-navigation-ex-anchor" href="#problems-with-lock"><i class="fa fa-link" aria-hidden="true"></i></a>2.2. Problems with Lock</h2>
 <ul>
 <li>Deadlock</li>
 <li>Starvation</li>
 </ul>
-<h1 id="comparing-other-mechanisms">Comparing other mechanisms</h1>
-<h2 id="synchronized">synchronized</h2>
+<h1 id="comparing-other-mechanisms"><a name="comparing-other-mechanisms" class="anchor-navigation-ex-anchor" href="#comparing-other-mechanisms"><i class="fa fa-link" aria-hidden="true"></i></a>3. Comparing other mechanisms</h1>
+<h2 id="synchronized"><a name="synchronized" class="anchor-navigation-ex-anchor" href="#synchronized"><i class="fa fa-link" aria-hidden="true"></i></a>3.1. synchronized</h2>
 <p><strong>ExampleWithSynchronized.java</strong></p>
 <pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
   count = count + <span class="hljs-number">1</span>;
 }
 </code></pre>
-<h2 id="reentrantlock">ReentrantLock</h2>
+<h2 id="reentrantlock"><a name="reentrantlock" class="anchor-navigation-ex-anchor" href="#reentrantlock"><i class="fa fa-link" aria-hidden="true"></i></a>3.2. ReentrantLock</h2>
 <p><strong>ExampleWithReentrantLock.java</strong></p>
 <pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
@@ -305,7 +309,7 @@ It supports various methods for fine grained control:</p>
 <li>getQueuedThreads </li>
 <li>getWaitingThreads(Condition condition)  </li>
 </ul>
-<h2 id="reentrantreadwritelock">ReentrantReadWriteLock</h2>
+<h2 id="reentrantreadwritelock"><a name="reentrantreadwritelock" class="anchor-navigation-ex-anchor" href="#reentrantreadwritelock"><i class="fa fa-link" aria-hidden="true"></i></a>3.3. ReentrantReadWriteLock</h2>
 <p>The idea behind read-write locks is that it&apos;s usually safe to read mutable variables concurrently as long as nobody is writing to this variable. So the read-lock can be held simultaneously by multiple threads as long as no threads hold the write-lock. This can improve performance and throughput in case that reads are more frequent than writes.</p>
 <p><strong>ExampleWithReentrantReadWriteLock.java</strong></p>
 <pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
@@ -362,7 +366,7 @@ pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">1</span
 pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">3</span>: end
 pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">1</span>: end
 </code></pre>
-<h2 id="stampedlock">StampedLock</h2>
+<h2 id="stampedlock"><a name="stampedlock" class="anchor-navigation-ex-anchor" href="#stampedlock"><i class="fa fa-link" aria-hidden="true"></i></a>3.4. StampedLock</h2>
 <p><strong>ExampleWithStampedLock.java</strong></p>
 <pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{
@@ -374,7 +378,7 @@ pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">1</span
   }
 }
 </code></pre>
-<h2 id="summary">Summary</h2>
+<h2 id="summary"><a name="summary" class="anchor-navigation-ex-anchor" href="#summary"><i class="fa fa-link" aria-hidden="true"></i></a>3.5. Summary</h2>
 <table>
 <thead>
 <tr>
@@ -416,8 +420,8 @@ pool-<span class="hljs-number">1</span>-thread-<span class="hljs-number">1</span
 </tr>
 </tbody>
 </table>
-<h1 id="deep-insight-into-stampedlock">Deep insight into StampedLock</h1>
-<h2 id="tryoptimisticread">tryOptimisticRead</h2>
+<h1 id="deep-insight-into-stampedlock"><a name="deep-insight-into-stampedlock" class="anchor-navigation-ex-anchor" href="#deep-insight-into-stampedlock"><i class="fa fa-link" aria-hidden="true"></i></a>4. Deep insight into StampedLock</h1>
+<h2 id="tryoptimisticread"><a name="tryoptimisticread" class="anchor-navigation-ex-anchor" href="#tryoptimisticread"><i class="fa fa-link" aria-hidden="true"></i></a>4.1. tryOptimisticRead</h2>
 <p>The optimistic lock is valid right after acquiring the lock. In contrast to normal read locks an optimistic lock doesn&apos;t prevent other threads to obtain a write lock instantaneously. After sending the first thread to sleep for one second the second thread obtains a write lock without waiting for the optimistic read lock to be released. From this point the optimistic read lock is no longer valid. Even when the write lock is released the optimistic read locks stays invalid.
 So when working with optimistic locks you have to validate the lock every time <em>before</em> accessing any shared mutable variable to make sure the read was still valid.</p>
 <p><strong>OptimisticRead.java</strong></p>
@@ -459,7 +463,7 @@ Write Lock acquired
 Optimistic Lock Valid: false
 Write done
 Optimistic Lock Valid: false
-</code></pre><h2 id="tryconverttowritelock">tryConvertToWriteLock</h2>
+</code></pre><h2 id="tryconverttowritelock"><a name="tryconverttowritelock" class="anchor-navigation-ex-anchor" href="#tryconverttowritelock"><i class="fa fa-link" aria-hidden="true"></i></a>4.2. tryConvertToWriteLock</h2>
 <p>Sometimes it&apos;s useful to convert a read lock into a write lock without unlocking and locking again. <code>StampedLock</code> provides the method <code>tryConvertToWriteLock()</code> for that purpose.</p>
 <p><strong>ConvertToWriteLock.java</strong></p>
 <pre class="language-"><code class="lang-java"><span class="hljs-comment">// Convert to write lock</span>
@@ -483,7 +487,7 @@ executor.submit(() -&gt; {
 </code></pre>
 <p>Can you find bug?
 There is a bug in above code, are you able to recognize?</p>
-<h1 id="best-practice">Best Practice</h1>
+<h1 id="best-practice"><a name="best-practice" class="anchor-navigation-ex-anchor" href="#best-practice"><i class="fa fa-link" aria-hidden="true"></i></a>5. Best Practice</h1>
 <ul>
 <li>If readers are much more than writers, StampedLock is preferred.</li>
 <li>StampedLock is not reentrant, so each call to acquire the lock always returns a new stamp and blocks if there&apos;s no lock available, even if the same thread already holds a lock, which may lead to deadlock.</li>
@@ -493,7 +497,7 @@ There is a bug in above code, are you able to recognize?</p>
 <li>The stamp returned by <em>tryOptimisticRead()</em> <strong>should not</strong> apply to <em>unlock(long stamp)</em>.</li>
 <li>If there is read lock held by others, one thread have valid optimistic read, this thread can obtain read lock by calling <em>readLock()</em>, while cannot obtain read lock by calling <em>tryConvertToReadLock(long stamp)</em>.</li>
 </ul>
-<h1 id="reference">Reference</h1>
+<h1 id="reference"><a name="reference" class="anchor-navigation-ex-anchor" href="#reference"><i class="fa fa-link" aria-hidden="true"></i></a>6. Reference</h1>
 <p>Try Block with Lock: <a href="https://stackoverflow.com/questions/10868423/lock-lock-before-try" target="_blank">https://stackoverflow.com/questions/10868423/lock-lock-before-try</a> </p>
 
                                 
@@ -554,7 +558,7 @@ There is a bug in above code, are you able to recognize?</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"StampedLock in Java 8","level":"1.6","depth":1,"next":{"title":"Tensorflow Java binding","level":"1.7","depth":1,"path":"TensorflowJavaBinding/TensorflowJavaBinding.md","ref":"TensorflowJavaBinding/TensorflowJavaBinding.md","articles":[]},"previous":{"title":"Java Interview Questions","level":"1.5","depth":1,"path":"JavaInterviewQuestions/JavaInterviewQuestions.md","ref":"JavaInterviewQuestions/JavaInterviewQuestions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","-fontsettings","livereload","github","prism","-baidu","splitter","-expandable-chapters","-tbfed-pagefooter","-simple-page-toc","-links","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"theme-comscore":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"Java-NullPointerException-Debug.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"3.2.3","description":"write something to remember"},"file":{"path":"StampedLockInJava8/StampedLockInJava8.md","mtime":"2020-05-17T08:57:41.608Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-17T08:58:28.632Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"StampedLock in Java 8","level":"1.6","depth":1,"next":{"title":"Tensorflow Java binding","level":"1.7","depth":1,"path":"TensorflowJavaBinding/TensorflowJavaBinding.md","ref":"TensorflowJavaBinding/TensorflowJavaBinding.md","articles":[]},"previous":{"title":"Java Interview Questions","level":"1.5","depth":1,"path":"JavaInterviewQuestions/JavaInterviewQuestions.md","ref":"JavaInterviewQuestions/JavaInterviewQuestions.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","-fontsettings","livereload","github","prism","prism-themes","-page-treeview","splitter","-expandable-chapters","-tbfed-pagefooter","-simple-page-toc","anchor-navigation-ex","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-base16-ateliersulphurpool.light.css"]},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"anchor-navigation-ex":{"associatedWithSummary":true,"float":{"floatIcon":"fa fa-navicon","level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"mode":"float","multipleH1":true,"pageTop":{"level1Icon":"","level2Icon":"","level3Icon":"","showLevelIcon":false},"printLog":false,"showGoTop":true,"showLevel":true},"theme-comscore":{},"prism-themes":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"Java-NullPointerException-Debug.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"3.2.3","description":"write something to remember"},"file":{"path":"StampedLockInJava8/StampedLockInJava8.md","mtime":"2020-05-17T09:35:58.164Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-17T09:36:44.090Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
