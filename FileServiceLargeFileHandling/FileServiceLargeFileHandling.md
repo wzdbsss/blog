@@ -1,6 +1,6 @@
 # File Service - Large File Handling
 
-File service is currently capable of handling large files (up to 5GB) and write them directly to AWS S3 by using a Java InputStream. By using a Java InputStream the binary data is streamed directly to S3 and not held in memory where large files will quickly exhaust the available memory. The binary data input stream is pulled from the HttpServletRequest and passed to the file service as seen in line 26 in the code below.  Also note that the content length of the stream is pulled in line 27. The first check in file service compares the content length to the max file size limit in order to validate the stream before streaming all of its contents. 
+File service is currently capable of handling large files (up to 5GB) and write them directly to AWS S3 by using a Java InputStream. By using a Java InputStream the binary data is streamed directly to S3 and not held in memory where large files will quickly exhaust the available memory. The binary data input stream is pulled from the HttpServletRequest and passed to the file service as seen in line 26 `request.getInputStream()` in the code below.  Also note that the content length of the stream is pulled in line 27. The first check in file service compares the content length to the max file size limit in order to validate the stream before streaming all of its contents. 
 
 ``` java
 @Override
