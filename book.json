@@ -10,7 +10,7 @@
         "highlight",
         "search-pro",
         "-sharing",
-        "fontsettings",
+        "-fontsettings",
         "livereload",
         "github",
         "-editlink",
@@ -18,9 +18,9 @@
         "-baidu",
         "splitter",
         "-sitemap",
-        "tbfed-pagefooter",
+        "-tbfed-pagefooter",
         "-simple-page-toc",
-        "links",
+        "-links",
         "-copy-code-button",
         "theme-comscore"
     ],
@@ -29,16 +29,6 @@
         "ebook": "styles/website.css"
     },
     "pluginsConfig": {
-        "tbfed-pagefooter": {
-            "copyright": "&copy wzdbsss",
-            "modify_label": "modified time: ",
-            "modify_format": "YYYY-MM-DD HH:mm:ss"
-        },
-        "fontsettings": {
-            "theme": "white",
-            "family": "serif",
-            "size": 12
-        },
         "simple-page-toc": {
             "maxDepth": 3,
             "skipFirstH1": true
