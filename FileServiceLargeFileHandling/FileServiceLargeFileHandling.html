@@ -1,0 +1,471 @@
+
+<!DOCTYPE HTML>
+<html lang="en-US" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>File Service - Large File Handling · Blog of wzdbsss</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search-pro/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-base16-ateliersulphurpool.light.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-splitter/splitter.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-theme-comscore/test.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="../styles/website.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="../TensorflowJavaBinding/TensorflowJavaBinding.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Java NullPointerException Debug
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../Performance-Testing-Using-Apache-JMeter-master/PerformanceTest.html">
+            
+                <a href="../Performance-Testing-Using-Apache-JMeter-master/PerformanceTest.html">
+            
+                    
+                    Performance Testing Using Apache JMeter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../DockerfileGracefulTermination.html">
+            
+                <a href="../DockerfileGracefulTermination.html">
+            
+                    
+                    Dockerfile graceful termination
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.html">
+            
+                <a href="../RemoteDebugK8sJavaApplication/RemoteDebugK8sJavaApplication.html">
+            
+                    
+                    Remote Debug K8s Java Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../JavaInterviewQuestions/JavaInterviewQuestions.html">
+            
+                <a href="../JavaInterviewQuestions/JavaInterviewQuestions.html">
+            
+                    
+                    Java Interview Questions
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../StampedLockInJava8/StampedLockInJava8.html">
+            
+                <a href="../StampedLockInJava8/StampedLockInJava8.html">
+            
+                    
+                    StampedLock in Java 8
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../TensorflowJavaBinding/TensorflowJavaBinding.html">
+            
+                <a href="../TensorflowJavaBinding/TensorflowJavaBinding.html">
+            
+                    
+                    Tensorflow Java binding
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.8" data-path="FileServiceLargeFileHandling.html">
+            
+                <a href="FileServiceLargeFileHandling.html">
+            
+                    
+                    File Service - Large File Handling
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >File Service - Large File Handling</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="file-service---large-file-handling">File Service - Large File Handling</h1>
+<p>File service is currently capable of handling large files (up to 5GB) and write them directly to AWS S3 by using a Java InputStream. By using a Java InputStream the binary data is streamed directly to S3 and not held in memory where large files will quickly exhaust the available memory. The binary data input stream is pulled from the HttpServletRequest and passed to the file service as seen in line 26 in the code below.  Also note that the content length of the stream is pulled in line 27. The first check in file service compares the content length to the max file size limit in order to validate the stream before streaming all of its contents. </p>
+<pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
+<span class="hljs-meta">@PreAuthorize</span>(<span class="hljs-string">&quot;#oauth2.hasScope(&apos;iot.fil.w&apos;)&quot;</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> ResponseEntity&lt;Void&gt; <span class="hljs-title">putFile</span><span class="hljs-params">(
+        HttpServletRequest request,
+        @ApiParam(value = <span class="hljs-string">&quot;unique identifier of the entity&quot;</span>, required = <span class="hljs-keyword">true</span>)</span>
+                @<span class="hljs-title">PathVariable</span><span class="hljs-params">(<span class="hljs-string">&quot;entityId&quot;</span>)</span>
+                String entityId,
+        @<span class="hljs-title">ApiParam</span><span class="hljs-params">(value = <span class="hljs-string">&quot;type of the file&quot;</span>)</span> @<span class="hljs-title">RequestHeader</span><span class="hljs-params">(value = <span class="hljs-string">&quot;type&quot;</span>, required = <span class="hljs-keyword">false</span>)</span>
+                String type,
+        @<span class="hljs-title">ApiParam</span><span class="hljs-params">(value = <span class="hljs-string">&quot;ETag of the latest version for optimistic locking&quot;</span>)</span>
+                @<span class="hljs-title">RequestHeader</span><span class="hljs-params">(value = <span class="hljs-string">&quot;If-Match&quot;</span>, required = <span class="hljs-keyword">false</span>)</span>
+                Integer ifMatch,
+        @<span class="hljs-title">ApiParam</span><span class="hljs-params">(value = <span class="hljs-string">&quot;file timestamp&quot;</span>)</span>
+                @<span class="hljs-title">RequestHeader</span><span class="hljs-params">(value = <span class="hljs-string">&quot;timestamp&quot;</span>, required = <span class="hljs-keyword">false</span>)</span>
+                String timestamp,
+        @<span class="hljs-title">ApiParam</span><span class="hljs-params">(value = <span class="hljs-string">&quot;description of the file&quot;</span>)</span>
+                @<span class="hljs-title">RequestHeader</span><span class="hljs-params">(value = <span class="hljs-string">&quot;description&quot;</span>, required = <span class="hljs-keyword">false</span>)</span>
+                String description)
+        <span class="hljs-keyword">throws</span> IOException </span>{
+
+    String filepath = FileServiceUtil.getFilePath(request, entityId);
+    FileData fd = fileService.getFileData(entityId, filepath);
+    <span class="hljs-keyword">try</span> {
+        MultiValueMap&lt;String, String&gt; headers =
+                fileService.putFile(
+                        request.getInputStream(),
+                        request.getContentLengthLong(),
+                        entityId,
+                        filepath,
+                        ifMatch,
+                        timestamp,
+                        request.getHeader(HttpHeaders.AUTHORIZATION),
+                        description,
+                        type);
+        <span class="hljs-keyword">if</span> (fd != <span class="hljs-keyword">null</span>) {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ResponseEntity&lt;Void&gt;(headers, HttpStatus.NO_CONTENT); <span class="hljs-comment">//Update</span>
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ResponseEntity&lt;Void&gt;(headers, HttpStatus.CREATED); <span class="hljs-comment">//Create</span>
+        }
+    } <span class="hljs-keyword">catch</span> (ConflictingETagException ex) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ResponseEntity&lt;Void&gt;(HttpStatus.CONFLICT);
+    }
+}
+</code></pre>
+<p>The Amazon S3 API provides a putObject method which takes an InputStream and writes the binary data directly to S3 as seen in the following code. </p>
+<pre class="language-"><code class="lang-java"><span class="hljs-function"><span class="hljs-keyword">private</span> PutObjectResult <span class="hljs-title">saveToS3</span><span class="hljs-params">(
+        String bucketName,
+        String entityId,
+        String filepath,
+        TenantVo tenantVo,
+        InputStream inputStream,
+        ObjectMetadata inputMetadata)</span> </span>{
+    PutObjectResult objectResult;
+    <span class="hljs-keyword">try</span> {
+        objectResult =
+                s3.putObject(
+                        bucketName,
+                        getS3Key(entityId, filepath, tenantVo),
+                        inputStream,
+                        inputMetadata);
+    } <span class="hljs-keyword">catch</span> (AmazonS3Exception ex) {
+        LOGGER.info(<span class="hljs-string">&quot;Unable to save file to S3.&quot;</span>);
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> S3AccessDeniedException(ex);
+    }
+    <span class="hljs-keyword">return</span> objectResult;
+}
+</code></pre>
+<p>When retrieving files from S3, file service uses the the getObject method of S3Object that contains an S3ObjectInputStream. The S3ObjectInputStream extends the standard java.io.InputStream and is handled the same way as seen in the code snippit below</p>
+<pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> InputStream <span class="hljs-title">retrieveFile</span><span class="hljs-params">(String entityId, String filepath, String accessToken)</span> </span>{
+    LOGGER.info(<span class="hljs-string">&quot;Retrieving file &quot;</span> + filepath);
+
+    String bucketName = <span class="hljs-keyword">null</span>;
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">//... validations ...</span>
+
+        <span class="hljs-comment">//Get the bucket name from the tenant</span>
+        bucketName = tenantVo.getResources().get(FileServiceUtil.BUCKET_NAME);
+        <span class="hljs-keyword">if</span> (bucketName != <span class="hljs-keyword">null</span>) {
+            S3Object s3Object =
+                    s3.getObject(bucketName, getS3Key(entityId, filepath, tenantVo));
+            <span class="hljs-keyword">return</span> s3Object.getObjectContent();
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> TenantBucketNotFoundException(<span class="hljs-keyword">null</span>);
+        }
+
+    } <span class="hljs-keyword">catch</span> (AmazonServiceException ex) {
+        <span class="hljs-comment">//... exception handling ...</span>
+        }
+        <span class="hljs-keyword">throw</span> ex;
+    } <span class="hljs-keyword">catch</span> (RestClientException ex) {
+        LOGGER.info(ex.getLocalizedMessage());
+        <span class="hljs-keyword">throw</span> ex;
+    }
+}
+</code></pre>
+<p>The Controller can then return the InputStream in the ResponseEntity without holding the data in memory as seen below. </p>
+<pre class="language-"><code class="lang-java"><span class="hljs-meta">@Override</span>
+<span class="hljs-meta">@PreAuthorize</span>(<span class="hljs-string">&quot;#oauth2.hasScope(&apos;iot.fil.r&apos;)&quot;</span>)
+<span class="hljs-function"><span class="hljs-keyword">public</span> ResponseEntity&lt;InputStreamResource&gt; <span class="hljs-title">getFile</span><span class="hljs-params">(
+        HttpServletRequest request,
+        @ApiParam(value = <span class="hljs-string">&quot;Id to instance of entity&quot;</span>, required = <span class="hljs-keyword">true</span>)</span> @<span class="hljs-title">PathVariable</span><span class="hljs-params">(<span class="hljs-string">&quot;entityId&quot;</span>)</span>
+                String entityId,
+        @<span class="hljs-title">ApiParam</span><span class="hljs-params">(value = <span class="hljs-string">&quot;ETag of the latest version&quot;</span>)</span>
+                @<span class="hljs-title">RequestHeader</span><span class="hljs-params">(value = <span class="hljs-string">&quot;If-None-Match&quot;</span>, required = <span class="hljs-keyword">false</span>)</span>
+                Integer ifNoneMatch) </span>{
+
+    String filepath = FileServiceUtil.getFilePath(request, entityId);
+    InputStream inputStream =
+            fileService.retrieveFile(
+                    entityId, filepath, request.getHeader(HttpHeaders.AUTHORIZATION));
+
+    InputStreamResource inputStreamResource = <span class="hljs-keyword">new</span> InputStreamResource(inputStream);
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ResponseEntity&lt;InputStreamResource&gt;(inputStreamResource, HttpStatus.OK);
+}
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../TensorflowJavaBinding/TensorflowJavaBinding.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Tensorflow Java binding">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"File Service - Large File Handling","level":"1.8","depth":1,"previous":{"title":"Tensorflow Java binding","level":"1.7","depth":1,"path":"TensorflowJavaBinding/TensorflowJavaBinding.md","ref":"TensorflowJavaBinding/TensorflowJavaBinding.md","articles":[]},"dir":"ltr"},"config":{"plugins":["highlight","search-pro","-sharing","-fontsettings","livereload","github","prism","prism-themes","-page-treeview","splitter","-expandable-chapters","-tbfed-pagefooter","-simple-page-toc","-anchor-navigation-ex","-copy-code-button","theme-comscore"],"styles":{"website":"styles/website.css"},"pluginsConfig":{"prism":{"css":["prism-themes/themes/prism-base16-ateliersulphurpool.light.css"]},"github":{"url":"https://github.com/wzdbsss"},"livereload":{},"simple-page-toc":{"maxDepth":3,"skipFirstH1":true},"splitter":{},"search-pro":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"highlight":{},"theme-comscore":{},"prism-themes":{},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"Java-NullPointerException-Debug.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Blog of wzdbsss","language":"en-US","gitbook":"3.2.3","description":"write something to remember"},"file":{"path":"FileServiceLargeFileHandling/FileServiceLargeFileHandling.md","mtime":"2020-05-17T12:54:21.505Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-05-17T12:55:12.612Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search-pro/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-splitter/splitter.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-theme-comscore/test.js"></script>
+        
+    
+
+    </body>
+</html>
+
