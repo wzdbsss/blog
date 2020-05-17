@@ -14,12 +14,13 @@
         "livereload",
         "github",
         "prism",
-        "-baidu",
+        "prism-themes",
+        "-page-treeview",
         "splitter",
         "-expandable-chapters",
         "-tbfed-pagefooter",
         "-simple-page-toc",
-        "-links",
+        "anchor-navigation-ex",
         "-copy-code-button",
         "theme-comscore"
     ],
@@ -33,6 +34,11 @@
         },
         "github": {
             "url": "https://github.com/wzdbsss"
+        },
+        "prism": {
+            "css": [
+                "prism-themes/themes/prism-base16-ateliersulphurpool.light.css"
+            ]
         }
     }
 }
